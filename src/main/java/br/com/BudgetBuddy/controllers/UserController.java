@@ -20,9 +20,10 @@ public class UserController {
     private UserRepository userRepository;
 
     @GetMapping
-    public List<User> getAll() {
-        var allUsers = userRepository.findAll();
-        return ResponseEntity.ok(allUsers).getBody();
+    public ResponseEntity<List<User>> getAllActiveUsers() {
+        List<User> activeUsers = userRepository.findByActivedTrue();
+        return ResponseEntity.ok(activeUsers);
+
     }
 
     @PostMapping()
