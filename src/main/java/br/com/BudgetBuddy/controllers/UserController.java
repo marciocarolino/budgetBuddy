@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -19,9 +20,9 @@ public class UserController {
     private UserRepository userRepository;
 
     @GetMapping
-    public ResponseEntity getAll() {
+    public List<User> getAll() {
         var allUsers = userRepository.findAll();
-        return ResponseEntity.ok(allUsers);
+        return ResponseEntity.ok(allUsers).getBody();
     }
 
     @PostMapping()
@@ -43,6 +44,22 @@ public class UserController {
             user.setEmail(data.email());
             user.setPassword(data.password());
             user.setActived(data.actived());
+            return ResponseEntity.ok(user);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteUser(@PathVariable int id) {
+
+        Optional<User> optionalUser = userRepository.findById(id);
+
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            user.setActived(false);
+            userRepository.save(user);
             return ResponseEntity.ok(user);
         } else {
             return ResponseEntity.notFound().build();
