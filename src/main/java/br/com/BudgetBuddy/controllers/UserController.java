@@ -5,6 +5,7 @@ import br.com.BudgetBuddy.domain.user.User;
 import br.com.BudgetBuddy.repository.UserRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +15,6 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/user")
 public class UserController {
-
 
     @Autowired
     private UserRepository userRepository;
@@ -27,6 +27,12 @@ public class UserController {
 
     @PostMapping()
     public ResponseEntity createUser(@RequestBody @Valid RequestUser data) {
+
+        if (userRepository.existsByEmail(data.email())) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("Email já cadastrado");
+        }
+
         User user = new User(data);
         user.setActived(true);
         userRepository.save(user);
