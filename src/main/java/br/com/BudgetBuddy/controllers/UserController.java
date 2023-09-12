@@ -39,21 +39,10 @@ public class UserController {
         return userService.updateUser(data);
 
     }
-//
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity deleteUser(@PathVariable int id) {
-//
-//        Optional<User> optionalUser = userRepository.findById(id);
-//
-//        if (optionalUser.isPresent()) {
-//            User user = optionalUser.get();
-//            user.setActived(false);
-//            userRepository.save(user);
-//            return ResponseEntity.ok(user);
-//        } else {
-//            return ResponseEntity.notFound().build();
-//        }
-//
-//    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteUser(@PathVariable int id) {
+        return userService.deleteUser(id);
+    }
 
 }
