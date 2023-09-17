@@ -1,17 +1,15 @@
-package br.com.BudgetBuddy.controllers;
+package br.com.BudgetBuddy.controllers.User;
 
-import br.com.BudgetBuddy.domain.user.RequestUser;
+import br.com.BudgetBuddy.dto.RequestUser;
 import br.com.BudgetBuddy.domain.user.User;
-import br.com.BudgetBuddy.repository.UserRepository;
-import br.com.BudgetBuddy.service.UserService;
+import br.com.BudgetBuddy.service.user.UserService;
+
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/user")
@@ -40,7 +38,7 @@ public class UserController {
 
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping(value = "/{id}")
     public ResponseEntity deleteUser(@PathVariable int id) {
         return userService.deleteUser(id);
     }

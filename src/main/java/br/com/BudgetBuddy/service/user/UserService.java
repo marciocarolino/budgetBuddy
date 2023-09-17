@@ -1,7 +1,7 @@
-package br.com.BudgetBuddy.service;
+package br.com.BudgetBuddy.service.user;
 
 
-import br.com.BudgetBuddy.domain.user.RequestUser;
+import br.com.BudgetBuddy.dto.RequestUser;
 import br.com.BudgetBuddy.domain.user.User;
 import br.com.BudgetBuddy.repository.UserRepository;
 import jakarta.validation.Valid;

@@ -1,4 +1,4 @@
-package br.com.BudgetBuddy.domain.user;
+package br.com.BudgetBuddy.dto;
 
 public record RequestUser(
 

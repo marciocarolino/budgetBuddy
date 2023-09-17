@@ -1,6 +1,7 @@
 package br.com.BudgetBuddy.domain.user;
 
 
+import br.com.BudgetBuddy.dto.RequestUser;
 import jakarta.persistence.*;
 import lombok.*;
 
