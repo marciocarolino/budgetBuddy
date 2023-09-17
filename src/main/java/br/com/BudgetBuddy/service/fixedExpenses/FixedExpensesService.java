@@ -6,6 +6,7 @@ import br.com.BudgetBuddy.dto.FixedExpensesDTO;
 import br.com.BudgetBuddy.repository.IFixedExpenses;
 import br.com.BudgetBuddy.repository.UserRepository;
 import jakarta.validation.Valid;
+import org.apache.velocity.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,31 +33,30 @@ public class FixedExpensesService {
     }
 
     public ResponseEntity createFixedExpenses(@RequestBody @Valid FixedExpensesDTO data) {
-        if (!userRepository.existsById(data.user_id())) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body("Usuário não existe!");
-        }
+        try {
+            // Verifica se o usuário existe
+            User user = userRepository.findById(Math.toIntExact(data.user_id()))
+                    .orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado"));
 
-        Optional<User> findUser = userRepository.findById(Math.toIntExact(data.user_id()));
-
-        if (findUser.isPresent()) {
-
-            User user = findUser.get();
-
-            if (user.getActived()) {
-
-                FixedExpenses fixedExpenses = new FixedExpenses(data);
-                fixedExpenses.setUser(user);
-
-                fixedExpensesRepository.save(fixedExpenses);
-
-                return ResponseEntity.ok(fixedExpenses);
-            }else{
+            // Verifica se o usuário está ativo
+            if (!user.getActived()) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                         .body("Usuário Desativado!");
             }
-        } else {
-            return ResponseEntity.notFound().build();
+
+            // Cria as despesas fixas associadas ao usuário
+            FixedExpenses fixedExpenses = new FixedExpenses(data);
+            fixedExpenses.setUser(user);
+
+            fixedExpensesRepository.save(fixedExpenses);
+
+            return ResponseEntity.ok(fixedExpenses);
+        } catch (NumberFormatException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("ID de usuário inválido");
+        } catch (ResourceNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(e.getMessage());
         }
-     }
     }
+}
