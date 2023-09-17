@@ -43,14 +43,19 @@ public class FixedExpensesService {
 
             User user = findUser.get();
 
-            FixedExpenses fixedExpenses = new FixedExpenses(data);
-            fixedExpenses.setUser(user);
+            if (user.getActived()) {
 
+                FixedExpenses fixedExpenses = new FixedExpenses(data);
+                fixedExpenses.setUser(user);
 
-            fixedExpensesRepository.save(fixedExpenses);
+                fixedExpensesRepository.save(fixedExpenses);
 
-            return ResponseEntity.ok(fixedExpenses);
-        }else{
+                return ResponseEntity.ok(fixedExpenses);
+            }else{
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body("Usuário Desativado!");
+            }
+        } else {
             return ResponseEntity.notFound().build();
         }
      }
