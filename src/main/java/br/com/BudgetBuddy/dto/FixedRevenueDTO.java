@@ -1,6 +1,6 @@
 package br.com.BudgetBuddy.dto;
 
-public record FixedRevenue(
+public record FixedRevenueDTO(
         int id,
         String name_revenue,
         String description_revenue,
