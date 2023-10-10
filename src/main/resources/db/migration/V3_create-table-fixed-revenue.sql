@@ -4,5 +4,7 @@ CREATE TABLE public.fixed_revenue(
   description_revenue varchar(255),
   value varchar(50),
   user_id int,
+  create_at Date,
+  updated_at Date,
   foreign key(user_id) references public.user(id)
 );

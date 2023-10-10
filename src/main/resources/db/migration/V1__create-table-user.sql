@@ -3,5 +3,7 @@ create table public.user(
     name varchar(255),
     email varchar(255),
     password varchar(255),
-    actived boolean
+    actived boolean,
+    create_at Date,
+    updated_at Date,
 );

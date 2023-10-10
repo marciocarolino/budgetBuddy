@@ -16,7 +16,7 @@ public class FixedExpensesController {
 
 
     @Autowired
-    FixedExpensesService fixedExpensesService;
+   private FixedExpensesService fixedExpensesService;
 
 
     @GetMapping
