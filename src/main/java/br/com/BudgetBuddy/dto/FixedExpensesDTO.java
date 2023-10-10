@@ -3,16 +3,13 @@ package br.com.BudgetBuddy.dto;
 
 // DTO
 
-import br.com.BudgetBuddy.domain.user.User;
-
 public record FixedExpensesDTO(
 
         int id,
-        String house_or_apartment,
-        String condominium_fee,
-        String iptu,
-        String water_bill,
-        String electricity_bil,
+        String name_expeneses,
+        String description_expenses,
+
+        String value,
         Long user_id
 
 ) {

@@ -4,7 +4,7 @@ import br.com.BudgetBuddy.domain.fixed_expenses.FixedExpenses;
 import br.com.BudgetBuddy.domain.user.User;
 import br.com.BudgetBuddy.dto.FixedExpensesDTO;
 import br.com.BudgetBuddy.repository.IFixedExpenses;
-import br.com.BudgetBuddy.repository.UserRepository;
+import br.com.BudgetBuddy.repository.IUserRepository;
 import jakarta.validation.Valid;
 import org.apache.velocity.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class FixedExpensesService {
@@ -24,7 +23,7 @@ public class FixedExpensesService {
     private IFixedExpenses fixedExpensesRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    private IUserRepository IUserRepository;
 
 
     public ResponseEntity<List<FixedExpenses>> getAllFixedExpenses() {
@@ -32,11 +31,11 @@ public class FixedExpensesService {
         return ResponseEntity.ok(fixedExpenses);
     }
 
-    public ResponseEntity createFixedExpenses(@RequestBody @Valid FixedExpensesDTO data) {
+    public ResponseEntity createFixedExpenses(@RequestBody @Valid FixedExpensesDTO fixedExpensesDTO) {
         try {
             // Verifica se o usuário existe
-            User user = userRepository.findById(Math.toIntExact(data.user_id()))
-                    .orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado"));
+            User user = IUserRepository.findById(Math.toIntExact(fixedExpensesDTO.user_id()))
+                    .orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado!"));
 
             // Verifica se o usuário está ativo
             if (!user.getActived()) {
@@ -44,8 +43,14 @@ public class FixedExpensesService {
                         .body("Usuário Desativado!");
             }
 
+            if (fixedExpensesRepository.existsByUserId(Math.toIntExact(fixedExpensesDTO.user_id()))) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body("Usuário já cadastrado!");
+            }
+
+
             // Cria as despesas fixas associadas ao usuário
-            FixedExpenses fixedExpenses = new FixedExpenses(data);
+            FixedExpenses fixedExpenses = new FixedExpenses(fixedExpensesDTO);
             fixedExpenses.setUser(user);
 
             fixedExpensesRepository.save(fixedExpenses);

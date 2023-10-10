@@ -3,7 +3,7 @@ package br.com.BudgetBuddy.service.user;
 
 import br.com.BudgetBuddy.dto.RequestUser;
 import br.com.BudgetBuddy.domain.user.User;
-import br.com.BudgetBuddy.repository.UserRepository;
+import br.com.BudgetBuddy.repository.IUserRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,36 +18,35 @@ import java.util.Optional;
 public class UserService {
 
     @Autowired
-    private UserRepository userRepository;
+    private IUserRepository IUserRepository;
 
 
     public ResponseEntity<List<User>> getAllUsers() {
-        List<User> activeUsers = userRepository.findByActivedTrue();
+        List<User> activeUsers = IUserRepository.findByActivedTrue();
         return ResponseEntity.ok(activeUsers);
     }
 
     public ResponseEntity createUser(@RequestBody @Valid RequestUser data) {
-        if (userRepository.existsByEmail(data.email())) {
+        if (IUserRepository.existsByEmail(data.email())) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body("E-mail já cadastrado!");
         }
 
         User user = new User(data);
         user.setActived(true);
-        userRepository.save(user);
+        IUserRepository.save(user);
         return ResponseEntity.ok(user);
     }
 
     public ResponseEntity updateUser(@RequestBody @Valid RequestUser data) {
-        Optional<User> optionalUser = userRepository.findById(data.id());
-
+        Optional<User> optionalUser = IUserRepository.findById(data.id());
 
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
 
             if (!user.getEmail().equals(data.email())) {
                 // Verifica se o novo email já existe em outro usuário
-                if (userRepository.existsByEmail(data.email())) {
+                if (IUserRepository.existsByEmail(data.email())) {
                     return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                             .body("E-mail já cadastrado!");
                 }
@@ -57,7 +56,7 @@ public class UserService {
             user.setPassword(data.password());
             user.setActived(data.actived());
 
-            userRepository.save(user);
+            IUserRepository.save(user);
 
 
             return ResponseEntity.ok(user);
@@ -68,12 +67,12 @@ public class UserService {
 
     public ResponseEntity deleteUser(int id) {
 
-        Optional<User> optionalUser = userRepository.findById(id);
+        Optional<User> optionalUser = IUserRepository.findById(id);
 
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
             user.setActived(false);
-            userRepository.save(user);
+            IUserRepository.save(user);
             return ResponseEntity.ok(user);
         } else {
             return ResponseEntity.notFound().build();
