@@ -20,10 +20,10 @@ public class FixedExpenses {
     private long id;
 
     @Column(name="name_expenses")
-    String name_expenses;
+    String nameExpenses;
 
     @Column(name="description_expenses")
-    String description_expenses;
+    String descriptionExpenses;
 
     @Column(name="value")
     String value;
@@ -35,8 +35,8 @@ public class FixedExpenses {
 
 
     public FixedExpenses(FixedExpensesDTO fixedExpensesDTO) {
-        this.name_expenses = fixedExpensesDTO.name_expeneses();
-        this.description_expenses = fixedExpensesDTO.description_expenses();
+        this.nameExpenses = fixedExpensesDTO.nameExpeneses();
+        this.descriptionExpenses = fixedExpensesDTO.descriptionExpenses();
         this.user = user;
     }
 }

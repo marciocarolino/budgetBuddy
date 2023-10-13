@@ -6,11 +6,11 @@ package br.com.BudgetBuddy.dto;
 public record FixedExpensesDTO(
 
         int id,
-        String name_expeneses,
-        String description_expenses,
+        String nameExpeneses,
+        String descriptionExpenses,
 
         String value,
-        Long user_id
+        Long userId
 
 ) {
 }

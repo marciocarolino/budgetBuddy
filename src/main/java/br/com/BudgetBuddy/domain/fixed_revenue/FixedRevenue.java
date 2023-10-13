@@ -22,10 +22,10 @@ public class FixedRevenue {
     private long id;
 
     @Column(name="name_revenue")
-    String name_revenue;
+    String nameRevenue;
 
     @Column(name="description_revenue")
-    String description_revenue;
+    String descriptionRevenue;
 
     @Column(name="value")
     String value;
@@ -41,8 +41,8 @@ public class FixedRevenue {
     private User user;
 
     public FixedRevenue(FixedRevenueDTO fixedRevenueDTO){
-        this.name_revenue = fixedRevenueDTO.name_revenue();
-        this.description_revenue = fixedRevenueDTO.description_revenue();
+        this.nameRevenue = fixedRevenueDTO.nameRevenue();
+        this.descriptionRevenue = fixedRevenueDTO.descriptionRevenue();
         this.value = fixedRevenueDTO.value();
         this.user = user;
     }

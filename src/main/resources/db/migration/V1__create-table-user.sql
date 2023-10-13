@@ -5,5 +5,5 @@ create table public.user(
     password varchar(255),
     actived boolean,
     create_at Date,
-    updated_at Date,
+    updated_at Date
 );

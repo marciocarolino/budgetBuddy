@@ -34,7 +34,7 @@ public class FixedExpensesService {
     public ResponseEntity createFixedExpenses(@RequestBody @Valid FixedExpensesDTO fixedExpensesDTO) {
         try {
             // Verifica se o usuário existe
-            User user = IUserRepository.findById(Math.toIntExact(fixedExpensesDTO.user_id()))
+            User user = IUserRepository.findById(Math.toIntExact(fixedExpensesDTO.userId()))
                     .orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado!"));
 
             // Verifica se o usuário está ativo
@@ -43,7 +43,7 @@ public class FixedExpensesService {
                         .body("Usuário Desativado!");
             }
 
-            if (fixedExpensesRepository.existsByUserId(Math.toIntExact(fixedExpensesDTO.user_id()))) {
+            if (fixedExpensesRepository.existsByUserId(Math.toIntExact(fixedExpensesDTO.userId()))) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                         .body("Usuário já cadastrado!");
             }

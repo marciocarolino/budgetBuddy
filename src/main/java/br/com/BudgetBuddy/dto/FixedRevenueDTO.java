@@ -2,10 +2,10 @@ package br.com.BudgetBuddy.dto;
 
 public record FixedRevenueDTO(
         int id,
-        String name_revenue,
-        String description_revenue,
+        String nameRevenue,
+        String descriptionRevenue,
         String value,
-        Long  user_id
+        Long  userId
 
 ) {
 }
