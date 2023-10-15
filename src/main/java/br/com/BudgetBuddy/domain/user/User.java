@@ -1,7 +1,7 @@
 package br.com.BudgetBuddy.domain.user;
 
 
-import br.com.BudgetBuddy.dto.RequestUser;
+import br.com.BudgetBuddy.dto.UserDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -31,10 +31,10 @@ public class User {
     private String password;
 
 
-    public User(RequestUser requestUser) {
-        this.name = requestUser.name();
-        this.email = requestUser.email();
-        this.password = requestUser.password();
-        this.actived = requestUser.actived();
+    public User(UserDTO userDTO) {
+        this.name = userDTO.name();
+        this.email = userDTO.email();
+        this.password = userDTO.password();
+        this.actived = userDTO.actived();
     }
 }

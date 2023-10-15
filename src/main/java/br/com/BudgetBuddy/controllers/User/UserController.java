@@ -1,6 +1,6 @@
 package br.com.BudgetBuddy.controllers.User;
 
-import br.com.BudgetBuddy.dto.RequestUser;
+import br.com.BudgetBuddy.dto.UserDTO;
 import br.com.BudgetBuddy.domain.user.User;
 import br.com.BudgetBuddy.service.user.UserService;
 
@@ -27,13 +27,13 @@ public class UserController {
     }
 
     @PostMapping()
-    public ResponseEntity createUser(@RequestBody @Valid RequestUser data) {
+    public ResponseEntity createUser(@RequestBody @Valid UserDTO data) {
         return userService.createUser(data);
 
     }
 
     @PutMapping()
-    public ResponseEntity updateUser(@RequestBody @Valid RequestUser data) {
+    public ResponseEntity updateUser(@RequestBody @Valid UserDTO data) {
         return userService.updateUser(data);
 
     }

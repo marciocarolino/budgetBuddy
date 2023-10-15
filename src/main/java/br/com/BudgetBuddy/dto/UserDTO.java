@@ -1,6 +1,6 @@
 package br.com.BudgetBuddy.dto;
 
-public record RequestUser(
+public record UserDTO(
 
         int id,
         String name,

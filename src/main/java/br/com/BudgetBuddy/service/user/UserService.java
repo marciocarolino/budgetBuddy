@@ -1,7 +1,7 @@
 package br.com.BudgetBuddy.service.user;
 
 
-import br.com.BudgetBuddy.dto.RequestUser;
+import br.com.BudgetBuddy.dto.UserDTO;
 import br.com.BudgetBuddy.domain.user.User;
 import br.com.BudgetBuddy.repository.IUserRepository;
 import jakarta.validation.Valid;
@@ -26,7 +26,7 @@ public class UserService {
         return ResponseEntity.ok(activeUsers);
     }
 
-    public ResponseEntity createUser(@RequestBody @Valid RequestUser data) {
+    public ResponseEntity createUser(@RequestBody @Valid UserDTO data) {
         if (IUserRepository.existsByEmail(data.email())) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body("E-mail já cadastrado!");
@@ -38,7 +38,7 @@ public class UserService {
         return ResponseEntity.ok(user);
     }
 
-    public ResponseEntity updateUser(@RequestBody @Valid RequestUser data) {
+    public ResponseEntity updateUser(@RequestBody @Valid UserDTO data) {
         Optional<User> optionalUser = IUserRepository.findById(data.id());
 
         if (optionalUser.isPresent()) {
