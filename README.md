@@ -5,7 +5,7 @@ BudgetBuddy
 
 ``` Fixed Expenses
 
-erDiagram
+classDiagram
     User ||--o{ Expenses : "One to Many"
     Expenses ||--o| User : "Many to One"
     User {
