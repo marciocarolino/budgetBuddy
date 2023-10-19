@@ -2,9 +2,6 @@
 BudgetBuddy
 
 
-
-``` Fixed Expenses
-
 classDiagram
     User ||--o{ Expenses : "One to Many"
     Expenses ||--o| User : "Many to One"
@@ -20,4 +17,4 @@ classDiagram
         value: String
         user_id: FK (User)
     }
-```
+
