@@ -8,7 +8,6 @@ classDiagram
         +age: int
         +makeSound(): void
     }
-
     class Dog {
         +breed: string
         +bark(): void
@@ -22,3 +21,4 @@ classDiagram
     Animal <|-- Dog
     Animal <|-- Cat
 ```
+
