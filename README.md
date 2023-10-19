@@ -2,19 +2,23 @@
 BudgetBuddy
 
 
-classDiagram
+
+``` Fixed Expenses
+
+erDiagram
     User ||--o{ Expenses : "One to Many"
     Expenses ||--o| User : "Many to One"
+    Expenses {
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        + id (PK)
+        name_expenses
+        description_expenses
+        value
+        user_id (FK)
+    }
     User {
         + id (PK)
-        name: String
         // Outros atributos do usuário aqui
     }
-    Expenses {
-        + id (PK)
-        name_expenses: String
-        description_expenses: String
-        value: String
-        user_id: FK (User)
-    }
 
+```
