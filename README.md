@@ -3,35 +3,36 @@ BudgetBuddy
 
 ```mermaid
 classDiagram
- 
-  class User{
-    +name: string
-    +email: string
-    +actived: boolean
-    +password: string
-  }
- 
- 
-```
-
-
-```mermaid
-classDiagram
-    class Animal {
-        +name: string
-        +age: int
-        +makeSound(): void
-    }
-    class Dog {
-        +breed: string
-        +bark(): void
+    class UserService {
+        +getAllUsers(): ResponseEntity<List<User>>
+        +createUser(data: UserDTO): ResponseEntity
+        +updateUser(data: UserDTO): ResponseEntity
+        +deleteUser(id: int): ResponseEntity
     }
 
-    class Cat {
-        +color: string
-        +meow(): void
+    class ResponseEntity {
+        -status: HttpStatus
+        -body: Object
     }
 
-    Animal <|-- Dog
-    Animal <|-- Cat
+    class IUserRepository {
+        // Métodos do repositório
+    }
+
+    class UserDTO {
+        // Atributos do DTO
+    }
+
+    class User {
+        -id: int
+        -name: String
+        -email: String
+        -password: String
+        -actived: boolean
+    }
+
+    class HttpStatus {
+        // Valores do HttpStatus
+    }
+ 
 ```
