@@ -29,10 +29,6 @@ classDiagram
         +setUser(user: User)
     }
 
-    class HttpStatus {
-        // Valores do HttpStatus
-    }
-
     UserService --|> User
     FixedExpensesService --|> FixedExpenses
     FixedExpenses --|> User
