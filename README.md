@@ -3,6 +3,20 @@ BudgetBuddy
 
 ```mermaid
 classDiagram
+ 
+  class User{
+    +name: string
+    +email: string
+    +actived: boolean
+    +password: string
+  }
+ 
+ 
+```
+
+
+```mermaid
+classDiagram
     class Animal {
         +name: string
         +age: int
@@ -21,4 +35,3 @@ classDiagram
     Animal <|-- Dog
     Animal <|-- Cat
 ```
-
