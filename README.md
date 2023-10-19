@@ -15,27 +15,6 @@ classDiagram
         +createFixedExpenses(fixedExpensesDTO: FixedExpensesDTO): ResponseEntity
     }
 
-    class ResponseEntity {
-        -status: HttpStatus
-        -body: Object
-    }
-
-    class IFixedExpenses {
-        // Métodos do repositório de despesas fixas
-    }
-
-    class IUserRepository {
-        // Métodos do repositório de usuários
-    }
-
-    class FixedExpensesDTO {
-        // Atributos do DTO de despesas fixas
-    }
-
-    class UserDTO {
-        // Atributos do DTO de usuário
-    }
-
     class User {
         -id: int
         -name: String
