@@ -22,7 +22,7 @@ public class UserService {
 
 
     public ResponseEntity<List<User>> getAllUsers() {
-        List<User> activeUsers = IUserRepository.findByActivedTrue();
+        List<User> activeUsers = IUserRepository.findByActivedAndOrderByUserId();
         return ResponseEntity.ok(activeUsers);
     }
 
