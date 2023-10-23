@@ -1,35 +1,8 @@
 # budgetBuddy
 BudgetBuddy
 
-```mermaid
-classDiagram
-    class UserService {
-        +getAllUsers(): ResponseEntity<List<User>>
-        +createUser(data: UserDTO): ResponseEntity
-        +updateUser(data: UserDTO): ResponseEntity
-        +deleteUser(id: int): ResponseEntity
-    }
 
-    class FixedExpensesService {
-        +getAllFixedExpenses(): ResponseEntity<List<FixedExpenses>>
-        +createFixedExpenses(fixedExpensesDTO: FixedExpensesDTO): ResponseEntity
-    }
+## Swagger 
 
-    class User {
-        -id: int
-        -name: String
-        -email: String
-        -password: String
-        -actived: boolean
-    }
+- http://localhost:8080/swagger-ui/index.html#/
 
-    class FixedExpenses {
-        -userId: int
-        // Outros atributos de despesas fixas
-        +setUser(user: User)
-    }
-
-    UserService --|> User
-    FixedExpensesService --|> FixedExpenses
-    FixedExpenses --|> User
-```
