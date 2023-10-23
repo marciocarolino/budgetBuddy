@@ -17,6 +17,7 @@ import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
+@Tag(name = "Users", description = "CRUD USERS")
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/users")
