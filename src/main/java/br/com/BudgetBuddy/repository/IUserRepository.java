@@ -3,11 +3,15 @@ package br.com.BudgetBuddy.repository;
 import br.com.BudgetBuddy.domain.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
 
 
 public interface IUserRepository extends JpaRepository<User, Integer> {
+
+
+    UserDetails findByLogin(String email);
 
     boolean existsByEmail(String email);
 

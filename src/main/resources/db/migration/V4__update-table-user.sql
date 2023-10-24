@@ -1,1 +1,0 @@
-ALTER TABLE public."user" ADD "role" varchar;

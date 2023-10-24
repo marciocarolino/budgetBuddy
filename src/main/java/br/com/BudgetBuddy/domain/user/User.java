@@ -36,6 +36,9 @@ public class User implements UserDetails {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "login")
+    private String login;
+
     @Column(name = "role")
     private UserRole role;
 
