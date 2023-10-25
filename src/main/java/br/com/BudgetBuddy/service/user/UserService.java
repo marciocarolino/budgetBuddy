@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -32,7 +33,8 @@ public class UserService {
                     .body("E-mail já cadastrado!");
         }
 
-        User user = new User(data);
+        User user = new User(data.name(), data.email(), data.password(), data.login(), data.role(), data.actived());
+        user.setPassword(new BCryptPasswordEncoder().encode(data.password()));
         user.setActived(true);
         IUserRepository.save(user);
         return ResponseEntity.ok(user);

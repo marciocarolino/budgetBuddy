@@ -43,11 +43,13 @@ public class User implements UserDetails {
     private UserRole role;
 
 
-    public User(UserDTO userDTO) {
-        this.name = userDTO.name();
-        this.email = userDTO.email();
-        this.password = userDTO.password();
-        this.actived = userDTO.actived();
+    public User(String name, String email, String password, String login, UserRole role, Boolean actived) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.login = login;
+        this.role = role;
+        this.actived = actived;
     }
 
     @Override
@@ -64,7 +66,7 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override

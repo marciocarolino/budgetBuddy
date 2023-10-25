@@ -28,14 +28,13 @@ public class UserController {
     private UserService userService;
 
 
-
     @GetMapping()
     public ResponseEntity<List<User>> getAllActiveUsers() {
         return userService.getAllUsers();
 
     }
 
-    @PostMapping()
+    @PostMapping("/register")
     public ResponseEntity createUser(@RequestBody @Valid UserDTO data) {
         return userService.createUser(data);
 

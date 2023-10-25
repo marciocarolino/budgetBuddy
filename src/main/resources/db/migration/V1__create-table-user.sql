@@ -6,6 +6,6 @@ create table public.user(
     role varchar(255),
     password varchar(255),
     actived boolean,
-    create_at Date,
+    created_at Date,
     updated_at Date
 );

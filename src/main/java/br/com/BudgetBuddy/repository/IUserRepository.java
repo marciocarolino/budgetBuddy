@@ -11,7 +11,7 @@ import java.util.List;
 public interface IUserRepository extends JpaRepository<User, Integer> {
 
 
-    UserDetails findByLogin(String email);
+    UserDetails findByLogin(String login);
 
     boolean existsByEmail(String email);
 
