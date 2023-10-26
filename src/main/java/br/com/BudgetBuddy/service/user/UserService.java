@@ -33,6 +33,11 @@ public class UserService {
                     .body("E-mail já cadastrado!");
         }
 
+        if (IUserRepository.existsByEmail(data.login())) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("Login já cadastrado!");
+        }
+
         User user = new User(data.name(), data.email(), data.password(), data.login(), data.role(), data.actived());
         user.setPassword(new BCryptPasswordEncoder().encode(data.password()));
         user.setActived(true);
